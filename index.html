@@ -58,7 +58,7 @@
                 const choiceNumber = Math.floor(Math.random()* computerOptions.length);
                 const computerChoice = computerOptions[choiceNumber];
                 // Function to check who wins
-                winner(this.innerText,computerChoice)
+                playRound(this.innerText,computerChoice)
                 // Calling gameOver function 
                 if(computerScore == 5 || playerScore == 5){
                     gameOver(playerOptions);
@@ -69,7 +69,7 @@
     }
  
     // Function to decide winner
-    const winner = (player,computer) => {
+    function playRound(player,computer){
         const result = document.querySelector('.result');
         const playerScoreBoard = document.querySelector('.p-count');
         const computerScoreBoard = document.querySelector('.c-count');
@@ -101,13 +101,13 @@
                 playerScoreBoard.textContent = playerScore;
             }
         }
-        else if(player == 'paper'){
+        else {
             if(computer == 'scissors'){
-                result.textContent = 'Computer Won';
+                result.innerText = 'Computer Won';
                 computerScore++;
                 computerScoreBoard.textContent = computerScore;
             }else{
-                result.textContent = 'Player Won';
+                result.innerText = 'Player Won';
                 playerScore++;
                 playerScoreBoard.textContent = playerScore;
             }
@@ -115,8 +115,8 @@
     }
  
     // Function to run when game is over
-    const gameOver = (playerOptions) => {
- 
+    function gameOver (playerOptions) {
+        let resetButton;
         const chooseMove = document.querySelector('.move');
         const result = document.querySelector('.result');
         playerOptions.forEach(option => {
@@ -126,20 +126,22 @@
         chooseMove.textContent = 'Game Over!!'
  
         if(playerScore > computerScore){
-            result.style.fontSize = '2rem';
             result.innerText = 'You Won The Game'
-            result.style.color = '#308D46';
+            result.style.color = 'green';
         }
         else if(playerScore < computerScore){
-            result.style.fontSize = '2rem';
             result.innerText = 'You Lost The Game';
             result.style.color = 'red';
         }
         else{
-            result.style.fontSize = '2rem';
             result.innerText = 'Tie';
             result.style.color = 'grey'
         }
+      resetButton = document.createElement('button');
+	  resetButton.textContent = 'Start new game';
+	  document.body.appendChild(resetButton);
+	  resetButton.addEventListener('click', () => {
+      window.location.reload(); })
     }
  
  
