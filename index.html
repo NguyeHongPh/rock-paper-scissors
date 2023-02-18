@@ -1,5 +1,3 @@
-<!-- index.html -->
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +7,9 @@
 </head>
 <body>
     <section class="game">
-        <!--Title -->
+        <div class="title_container">
         <div class="title">Rock Paper Scissor</div>
-         
-          <!--Display Score of player and computer -->
+        </div>
         <div class="score"> 
             <div class="playerScore">
                 <h2>Player</h2>
@@ -25,41 +22,33 @@
  
             </div>
         </div>
-       
+        <div class = "choice_container">
         <div class="move">Choose your move</div>
-         
-          <!--Options available to player to play game -->
         <div class="options">
             <button class="rock">Rock</button>
             <button class="paper">Paper</button>
             <button class="scissor">Scissors</button>   
-        </div>
-         
-          <!--Final result of game -->
+            </div>
         <div class="result"></div>
+        </div> 
+        
  
     </section>
  
     <script>
     let playerScore = 0;
     let computerScore = 0;
- 
- 
-    // Function to
     const playGame = () => {
         const rockBtn = document.querySelector('.rock');
         const paperBtn = document.querySelector('.paper');
         const scissorBtn = document.querySelector('.scissor');
         const playerOptions = [rockBtn,paperBtn,scissorBtn];
         const computerOptions = ['rock','paper','scissors']
-        // Function to start playing game
         playerOptions.forEach(option => {
             option.addEventListener('click',function(){
                 const choiceNumber = Math.floor(Math.random()* computerOptions.length);
                 const computerChoice = computerOptions[choiceNumber];
-                // Function to check who wins
                 playRound(this.innerText,computerChoice)
-                // Calling gameOver function 
                 if(computerScore == 5 || playerScore == 5){
                     gameOver(playerOptions);
                 }
@@ -67,8 +56,6 @@
         })
          
     }
- 
-    // Function to decide winner
     function playRound(player,computer){
         const result = document.querySelector('.result');
         const playerScoreBoard = document.querySelector('.p-count');
@@ -113,10 +100,7 @@
             }
         }
     }
- 
-    // Function to run when game is over
     function gameOver (playerOptions) {
-        let resetButton;
         const chooseMove = document.querySelector('.move');
         const result = document.querySelector('.result');
         playerOptions.forEach(option => {
@@ -134,20 +118,28 @@
             result.style.color = 'red';
         }
         else{
-            result.innerText = 'Tie';
+            result.innerText = 'The result is even';
             result.style.color = 'grey'
         }
+        let resetButton;
       resetButton = document.createElement('button');
-	  resetButton.textContent = 'Start new game';
+      resetButton.classList.add('reload')
+      resetButton.textContent= 'Start new game';
+      resetButton.style.position = "absolute";
+      resetButton.style.left = "50%";
+      resetButton.style.transform = "translateX(-50%)";
+      resetButton.style.marginTop = "450px"; 
 	  document.body.appendChild(resetButton);
 	  resetButton.addEventListener('click', () => {
       window.location.reload(); })
     }
- 
- 
-    // Calling playGame function inside game
     playGame();
 
     </script>
+    
 </body>
+<footer>
+    <p> Thanks for visting <br>
+    <a href="https://github.com/hongpnguyen13198?tab=repositories">Please follow my github pages for more incoming projects</a></p>
+</footer>
 </html>
